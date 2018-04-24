@@ -1,7 +1,6 @@
 from Cell import *
 from random import randint
 
-
 class Board(object):
     """
     Represents a matrix of cells
@@ -19,7 +18,7 @@ class Board(object):
         for i in range(_size):
             x = []
             for j in range(_size):
-                x.append(Cell(-1))
+                x.append(Cell(-1, State.HIDDEN))
             self._board.append(x)
         self._init_bombs_board()
 
