@@ -34,6 +34,9 @@ class Board(object):
     def get_num_bombs(self):
         return self._num_bombs
 
+    def get_size(self):
+        return self._size
+
     def _set_bomb_at_pos(self, x_coord, y_coord):
         self.__set_cell_value_at_pos(0, x_coord, y_coord)
         self._notify_board_new_bomb(x_coord, y_coord)

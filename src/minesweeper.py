@@ -20,6 +20,8 @@ class Game(object):
         return self.finish
 
     def play_show(self, position_to_show):
+        if position_to_show.x >= self.board.get_size() or position_to_show.y >= self.board.get_size():
+            raise InputParser.ParseException("ERROR: position not valid")
         try:
             self.board.add_show(position_to_show)
         except GameEndException:
@@ -29,6 +31,8 @@ class Game(object):
         self.check_finish()
 
     def play_flag(self, position_to_flag):
+        if position_to_flag.x >= self.board.get_size() or position_to_flag.y >= self.board.get_size():
+            raise InputParser.ParseException("ERROR: position not valid")
         if self.available_flags > 0:
             self.board.add_flag(position_to_flag)
             self.available_flags -= 1
