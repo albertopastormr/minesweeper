@@ -1,6 +1,7 @@
 from Cell import *
 from random import randint
 
+
 class Board(object):
     """
     Represents a matrix of cells
@@ -18,7 +19,7 @@ class Board(object):
         for i in range(_size):
             x = []
             for j in range(_size):
-                x.append(Cell(-1, State.HIDDEN))
+                x.append(Cell(-1, Status.HIDDEN))
             self._board.append(x)
         self._init_bombs_board()
 
@@ -45,16 +46,39 @@ class Board(object):
                     self.__set_cell_value_at_pos(new_distance_value, i, j)
 
     def show_board(self):
-        print("/////////- MINESWEEPER GAME -///////// ")
-        print("-------------------------------------")
+        board_str = ""
+        pprint_str = ""
         for i in range(self._size):
-            print_string = "|"
+            board_str += "|"
+            pprint_str += "------"
             for j in range(self._size):
-                print_string += " " + str(self._get_cell_at_pos(i, j)) + " "
-            print_string += "|"
-            print(print_string)
-        print("-------------------------------------")
+                board_str += " " + str(self._get_cell_at_pos(i, j)) + " "
+            board_str += "|\n"
+        pprint_str += "\n"
+        return pprint_str + board_str + pprint_str
 
+    def reset(self):
+        for i in range(self._size):
+            for j in range(self._size):
+                self._board[i][j].reset()
+        self._init_bombs_board()
 
-if __name__ == "__main__":
-    Board(4, 2).show_board()
+    def surrender(self):
+        for i in range(self._size):
+            for j in range(self._size):
+                self._board[i][j].surrender()
+
+    def add_flag(self, position_flag):
+        self._board[position_flag.x][position_flag.y].set_status(Status.FLAG)
+
+    def add_show(self, position_show):
+        self._board[position_show.x][position_show.y].set_status(Status.SHOW)
+
+    def check_finish(self):
+        is_finish = True
+        i = j = 0
+        while i in range(self._size) and is_finish:
+            while j in range(self._size) and is_finish:
+                if self._board[i][j].check_finish:
+                    is_finish = False
+        return is_finish
