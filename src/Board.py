@@ -31,6 +31,9 @@ class Board(object):
     def _get_cell_at_pos(self, x_coord, y_coord):
         return self._board[x_coord][y_coord]
 
+    def get_num_bombs(self):
+        return self._num_bombs
+
     def _set_bomb_at_pos(self, x_coord, y_coord):
         self.__set_cell_value_at_pos(0, x_coord, y_coord)
         self._notify_board_new_bomb(x_coord, y_coord)
@@ -47,10 +50,10 @@ class Board(object):
 
     def show_board(self):
         board_str = ""
-        pprint_str = ""
+        pprint_str = " "
         for i in range(self._size):
             board_str += "|"
-            pprint_str += "------"
+            pprint_str += "---"
             for j in range(self._size):
                 board_str += " " + str(self._get_cell_at_pos(i, j)) + " "
             board_str += "|\n"

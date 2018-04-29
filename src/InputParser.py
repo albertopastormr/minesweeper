@@ -14,9 +14,9 @@ class ParseException(Exception):
 
 def parse_coordinates(str_input):
     input_numbers = str_input.split(" ")
-    if input_numbers.size() == 2:
+    if len(input_numbers) == 2:
         if input_numbers[0].isdigit() and input_numbers[1].isdigit():
-            return Position(input_numbers[0], input_numbers)
+            return Position(int(input_numbers[0]), int(input_numbers[1]))
         else:
             raise ParseException("ERROR: coordinates must be represented by two positive integers")
     else:
@@ -25,6 +25,6 @@ def parse_coordinates(str_input):
 
 def parse_int(str_int):
     if str_int.isdigit():
-        return str_int
+        return int(str_int)
     else:
         raise ParseException("ERROR: needed a integer as input")

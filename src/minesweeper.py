@@ -1,8 +1,8 @@
 import InputParser
 from Board import Board
 from random import randint
-
 from Controller import Controller
+import sys
 
 
 class Game(object):
@@ -11,8 +11,8 @@ class Game(object):
     """
 
     def __init__(self, size):
-        self.board = Board(size, randint(1, size*size))
-        self.num_bombs = self.board._num_bombs
+        self.board = Board(size, randint(1, (size*size)/2))
+        self.num_bombs = self.board.get_num_bombs()
         self.available_flags = self.num_bombs
         self.finish = False
 
@@ -36,7 +36,6 @@ class Game(object):
     def surrender(self):
         self.finish = True
         self.board.surrender()
-        return self.board.show_board()
 
     def reset(self):
         self.board.reset()
@@ -51,6 +50,7 @@ def main():
     new_game = Game(size_selected)
     controller = Controller(new_game)
     controller.execute()
+    sys.exit(0)
 
 
 if __name__ == '__main__':

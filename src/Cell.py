@@ -56,6 +56,8 @@ class Cell(object):
         if new_status == Status.FLAG:
             if self.status == Status.HIDDEN:
                 self.status = Status.FLAG
+        else:
+            self.status = new_status
 
     def check_finish(self):
         if (self.status == Status.SHOW or self.status == Status.FLAG) and self.bomb_distance == 0:
