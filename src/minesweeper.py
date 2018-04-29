@@ -1,7 +1,7 @@
 import InputParser
 from Board import Board
 from random import randint
-from Controller import Controller
+from Controller import Controller, GameEndException
 import sys
 
 
@@ -20,7 +20,12 @@ class Game(object):
         return self.finish
 
     def play_show(self, position_to_show):
-        self.board.add_show(position_to_show)
+        try:
+            self.board.add_show(position_to_show)
+        except GameEndException:
+            self.finish = True
+            raise
+
         self.check_finish()
 
     def play_flag(self, position_to_flag):

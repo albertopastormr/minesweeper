@@ -1,5 +1,7 @@
 from enum import Enum
 
+from Controller import GameEndException
+
 
 class Status(Enum):
     HIDDEN = 0
@@ -56,6 +58,13 @@ class Cell(object):
         if new_status == Status.FLAG:
             if self.status == Status.HIDDEN:
                 self.status = Status.FLAG
+        elif new_status == Status.SHOW:
+            if self.status == Status.HIDDEN:
+                if not self.bomb_distance == 0:
+                    self.status = new_status
+                else:
+                    self.status = new_status
+                    raise GameEndException("Bomb found ! You lost !")
         else:
             self.status = new_status
 
