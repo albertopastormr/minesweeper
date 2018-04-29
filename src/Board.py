@@ -83,8 +83,8 @@ class Board(object):
     def check_finish(self):
         is_finish = True
         i = j = 0
-        while i in range(self._size) and is_finish:
-            while j in range(self._size) and is_finish:
+        while i < self._size and is_finish:
+            while j < self._size and is_finish:
                 if self._board[i][j].check_finish:
                     is_finish = False
         return is_finish
