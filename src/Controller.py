@@ -45,6 +45,8 @@ class Controller(object):
                     self.actual_game.show_game()
                 elif option_input == "help":
                     print("available commands: <show{'x coord','y_coord'}> <flag{'x coord','y_coord'}> <surrender> <reset> <help>")
+                elif option_input == "save":
+                    self.actual_game.save_file()
                 else:
                     print("unknown command")
                     print("available commands: <show{'x coord','y_coord'}> <flag{'x coord','y_coord'}> <surrender> <reset> <help>")

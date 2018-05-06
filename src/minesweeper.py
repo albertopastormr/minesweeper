@@ -3,6 +3,7 @@ from Board import Board
 from random import randint
 from Controller import Controller, GameEndException
 import sys
+import arrow
 
 
 class Game(object):
@@ -51,6 +52,12 @@ class Game(object):
 
     def check_finish(self):
         self.finish = self.board.check_finish()
+
+    def save_file(self):
+        file_content = "Minesweeper status at time: " + str(arrow.now().format('DD-MM-YYYY HH:mm:ss')) + "\n" + str(self.board.show_board())
+        file_name = "C:/Users/Alberto/Documents/GitHub/minesweeper/ms-" + str(arrow.now().format('DD-MM-YYYY-HH_mm_ss')) + ".txt"
+        with open(file_name, 'w') as file_to_write:
+            file_to_write.write(file_content)
 
 
 def main():
